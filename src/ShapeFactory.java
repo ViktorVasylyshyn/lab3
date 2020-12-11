@@ -1,3 +1,6 @@
+import common.AdditionalParameters;
+import common.ShapeType;
+
 import java.awt.geom.Point2D;
 import java.awt.GradientPaint;
 import java.awt.Color;
@@ -23,24 +26,24 @@ public class ShapeFactory
     public int height;
 
     /** ShapeFactory creates shapes depending on the incoming parameters */
-    public ShapeFactory(final int shape_type) {
+    public ShapeFactory(final ShapeType type, final AdditionalParameters parameters) {
         this.width = 25;
         this.height = 25;
         this.stroke = new BasicStroke(3.0f);
-        switch (shape_type / 10) {
-            case 1: {
+        switch (type) {
+            case HEXAGON: {
                 this.shape = createStar(3, new Point(0, 0), this.width / 2.0, this.width / 2.0);
                 break;
             }
-            case 3: {
+            case STAR: {
                 this.shape = createStar(5, new Point(0, 0), this.width / 2.0, this.width / 4.0);
                 break;
             }
-            case 5: {
+            case SQUARE: {
                 this.shape = new Rectangle2D.Double(-this.width / 2.0, -this.height / 2.0, this.width, this.height);
                 break;
             }
-            case 7: {
+            case TRIANGLE: {
                 final GeneralPath path = new GeneralPath();
                 final double tmp_height = Math.sqrt(2.0) / 2.0 * this.height;
                 path.moveTo(-this.width / 2, -tmp_height);
@@ -50,7 +53,7 @@ public class ShapeFactory
                 this.shape = path;
                 break;
             }
-            case 9: {
+            case PIE: {
                 this.shape = new Arc2D.Double(-this.width / 2.0, -this.height / 2.0, this.width, this.height, 30.0, 300.0, 2);
                 break;
             }
@@ -58,23 +61,23 @@ public class ShapeFactory
                 throw new Error("type is nusupported");
             }
         }
-        switch (shape_type % 10) {
-            case 1: {
+        switch (parameters) {
+            case STROKE_3: {
                 this.stroke = new BasicStroke(3.0f);
                 break;
             }
-            case 3: {
+            case ABSENT: {
                 break;
             }
-            case 4: {
+            case STROKE_7: {
                 this.stroke = new BasicStroke(7.0f);
                 break;
             }
-            case 7: {
+            case GRADIENT: {
                 this.paint = new GradientPaint((float)(-this.width), (float)(-this.height), Color.white, (float)this.width, (float)this.height, Color.gray, true);
                 break;
             }
-            case 8: {
+            case COLOR_RED: {
                 this.paint = Color.red;
                 break;
             }

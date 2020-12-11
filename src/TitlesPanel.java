@@ -1,3 +1,6 @@
+import common.AdditionalParameters;
+import common.ShapeType;
+
 import java.awt.Insets;
 import java.awt.Dimension;
 import java.awt.geom.AffineTransform;
@@ -17,13 +20,15 @@ public class TitlesPanel extends JPanel implements ActionListener
     private Timer animation;
     private boolean is_done;
     private int start_angle;
-    private int shape;
+    private ShapeType type;
+    private AdditionalParameters parameters;
 
     //** We put an shape identifier to constructor*/
-    public TitlesPanel(final int _shape) {
+    public TitlesPanel(final ShapeType type, final AdditionalParameters parameters) {
         this.start_angle = 0;
         this.is_done = true;
-        this.shape = _shape;
+        this.type = type;
+        this.parameters= parameters;
         (this.animation = new Timer(50, this)).setInitialDelay(50);
         this.animation.start();
     }
@@ -43,7 +48,7 @@ public class TitlesPanel extends JPanel implements ActionListener
         final Insets insets = this.getInsets();
         final int w = size.width - insets.left - insets.right;
         final int h = size.height - insets.top - insets.bottom;
-        final ShapeFactory shape = new ShapeFactory(this.shape);
+        final ShapeFactory shape = new ShapeFactory(type, parameters);
         this.g2d.setStroke(shape.stroke);
         this.g2d.setPaint(shape.paint);
         double angle = this.start_angle++;
