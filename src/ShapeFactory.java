@@ -9,6 +9,10 @@ import java.awt.Paint;
 import java.awt.BasicStroke;
 import java.awt.Shape;
 
+/** Класс-фабрика создающий фигуры в зависимости от параметров
+ * @author unknown
+ * @version 1.0
+ * */
 
 public class ShapeFactory
 {
@@ -18,6 +22,7 @@ public class ShapeFactory
     public int width;
     public int height;
 
+    /** В зависимости от входящих параметров класс фигура может принимать разные формы и параметры */
     public ShapeFactory(final int shape_type) {
         this.width = 25;
         this.height = 25;

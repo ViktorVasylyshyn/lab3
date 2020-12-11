@@ -19,6 +19,7 @@ public class TitlesPanel extends JPanel implements ActionListener
     private int start_angle;
     private int shape;
 
+    //** В конструктор калсса нужно подать идентификатор фигуры*/
     public TitlesPanel(final int _shape) {
         this.start_angle = 0;
         this.is_done = true;
@@ -33,7 +34,8 @@ public class TitlesPanel extends JPanel implements ActionListener
             this.repaint();
         }
     }
-
+    
+    /** Метод отрисовывающий фигуры */
     private void doDrawing(final Graphics g) {
         this.is_done = false;
         (this.g2d = (Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
